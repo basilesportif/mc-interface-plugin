@@ -1,3 +1,4 @@
-name: MC-Plugin-Template
+name: MC-Kinode-Interface-Plugin
 version: 1.0
-main: net.example.PluginInstance
+main: org.kinode.PluginInstance
+description: A plugin to log player movements to the console.

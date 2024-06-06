@@ -2,14 +2,22 @@ package org.kinode;
 
 import org.kinode.managers.PluginMgr;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
 
-public final class PluginInstance extends JavaPlugin {
+public final class PluginInstance extends JavaPlugin implements Listener {
 
     private static PluginInstance instance;
     private PluginMgr manager;
+    private Location prevLocation;
 
     @Override
     public void onEnable() {
+        getLogger().info("Movement logging enabled. TIMTIME.");
+        Bukkit.getPluginManager().registerEvents(this, this);
         instance = this;
         this.manager = new PluginMgr();
     }
@@ -18,6 +26,24 @@ public final class PluginInstance extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         // here
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Location toLocation = event.getTo();
+        // don't print pitch & yaw
+        if (prevLocation != null && toLocation.getX() == prevLocation.getX() && toLocation.getY() == prevLocation.getY()
+                && toLocation.getZ() == prevLocation.getZ()) {
+            return;
+        }
+        prevLocation = toLocation;
+        getLogger().info(event.getPlayer().getName() + " moved to X: " + toLocation.getX() + " Y: " + toLocation.getY()
+                + " Z: " + toLocation.getZ());
+        if (Math.abs(toLocation.getX()) > 100 || Math.abs(toLocation.getY()) > 100
+                || Math.abs(toLocation.getZ()) > 100) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage("Movement outside allowed bounds is not permitted.");
+        }
     }
 
     /**
