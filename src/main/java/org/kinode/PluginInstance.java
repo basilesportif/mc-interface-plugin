@@ -1,6 +1,6 @@
-package net.example;
+package org.kinode;
 
-import net.example.managers.PluginMgr;
+import org.kinode.managers.PluginMgr;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PluginInstance extends JavaPlugin {
@@ -35,15 +35,19 @@ public final class PluginInstance extends JavaPlugin {
     }
 
     /**
-     * Returns true or false depending on the value of the debug config option in config.yml if it exists.
+     * Returns true or false depending on the value of the debug config option in
+     * config.yml if it exists.
      * By default, it returns false.
+     * 
      * @return true or false
      */
     public boolean isDebugMode() {
         boolean isMgrReady = manager != null && manager.isInitialized();
-        boolean isConfigMgrReady = isMgrReady && manager.getConfigMgr() != null && manager.getConfigMgr().isInitialized();
+        boolean isConfigMgrReady = isMgrReady && manager.getConfigMgr() != null
+                && manager.getConfigMgr().isInitialized();
 
-        if (isConfigMgrReady && manager.getConfigMgr().get("debug") != null &&  manager.getConfigMgr().get("debug") instanceof Boolean)
+        if (isConfigMgrReady && manager.getConfigMgr().get("debug") != null
+                && manager.getConfigMgr().get("debug") instanceof Boolean)
             return (boolean) manager.getConfigMgr().get("debug");
         return false;
     }

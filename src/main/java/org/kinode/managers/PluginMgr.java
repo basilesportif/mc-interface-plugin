@@ -1,12 +1,13 @@
-package net.example.managers;
+package org.kinode.managers;
 
 public class PluginMgr extends Manager {
 
     /**
      * @param registerAtStartUp If true, the manager will be registered at startup
-     * PluginMgr is the main manager, it handles other managers and plugins tasks.
+     *                          PluginMgr is the main manager, it handles other
+     *                          managers and plugins tasks.
      */
-    public PluginMgr(boolean ...registerAtStartUp) {
+    public PluginMgr(boolean... registerAtStartUp) {
         super(registerAtStartUp);
     }
 
@@ -32,12 +33,13 @@ public class PluginMgr extends Manager {
     // Listeners
     private void registerEvents() {
         // PluginInstance.getInstance().getServer().getPluginManager()
-        //                .registerEvents(new MyListener(), PluginInstance.getInstance());
+        // .registerEvents(new MyListener(), PluginInstance.getInstance());
     }
 
     // Commands
     private void registerCommands() {
-        // PluginInstance.getInstance().getCommand("mycommand").setExecutor(new MyCommand()
+        // PluginInstance.getInstance().getCommand("mycommand").setExecutor(new
+        // MyCommand()
     }
 
     // Manager Getters

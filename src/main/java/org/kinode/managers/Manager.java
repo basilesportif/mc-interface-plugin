@@ -1,4 +1,4 @@
-package net.example.managers;
+package org.kinode.managers;
 
 public class Manager {
 
@@ -6,11 +6,14 @@ public class Manager {
 
     /**
      * @param registerAtStartUp If true, the manager will be registered at startup
-     * Manager is a class that handles a specific task, use it to organize your code.
-     * Create a new class that extends Manager and override the register() method.
-     * Example: ConfigMgr handles the config.yml file and its values
+     *                          Manager is a class that handles a specific task, use
+     *                          it to organize your code.
+     *                          Create a new class that extends Manager and override
+     *                          the register() method.
+     *                          Example: ConfigMgr handles the config.yml file and
+     *                          its values
      */
-    public Manager(boolean ...registerAtStartUp) {
+    public Manager(boolean... registerAtStartUp) {
         if (registerAtStartUp.length > 0 && !registerAtStartUp[0])
             return;
         register();
