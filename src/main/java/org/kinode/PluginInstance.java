@@ -13,6 +13,7 @@ public final class PluginInstance extends JavaPlugin implements Listener {
     private static PluginInstance instance;
     private PluginMgr manager;
     private Location prevLocation;
+    private static final int ALLOWED_BOUNDS = 50000;
 
     @Override
     public void onEnable() {
@@ -39,8 +40,10 @@ public final class PluginInstance extends JavaPlugin implements Listener {
         prevLocation = toLocation;
         getLogger().info(event.getPlayer().getName() + " moved to X: " + toLocation.getX() + " Y: " + toLocation.getY()
                 + " Z: " + toLocation.getZ());
-        if (Math.abs(toLocation.getX()) > 100 || Math.abs(toLocation.getY()) > 100
-                || Math.abs(toLocation.getZ()) > 100) {
+        event.getPlayer()
+                .sendMessage("X: " + toLocation.getX() + ", Y: " + toLocation.getY() + ", Z: " + toLocation.getZ());
+        if (Math.abs(toLocation.getX()) > ALLOWED_BOUNDS || Math.abs(toLocation.getY()) > ALLOWED_BOUNDS
+                || Math.abs(toLocation.getZ()) > ALLOWED_BOUNDS) {
             event.setCancelled(true);
             event.getPlayer().sendMessage("Movement outside allowed bounds is not permitted.");
         }
